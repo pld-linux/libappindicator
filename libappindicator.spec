@@ -16,7 +16,7 @@ Summary:	Application indicators library
 Summary(pl.UTF-8):	Biblioteka wskaźników aplikacji
 Name:		libappindicator
 Version:	12.10.0
-Release:	6
+Release:	7
 License:	LGPL v2.1 or LGPL v3
 Group:		Libraries
 #Source0Download: https://launchpad.net/libappindicator/+download
@@ -25,6 +25,8 @@ Source0:	http://launchpad.net/libappindicator/12.10/%{version}/+download/%{name}
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-mono.patch
 Patch2:		mono4.patch
+Patch3:		gtk-widget-ref-type-fix.patch
+Patch4:		python-constants-declaration-fix.patch
 URL:		https://launchpad.net/libappindicator
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
@@ -266,6 +268,8 @@ Dokumentacja API biblioteki libappindicator (zarówno w wersji GTK+
 %patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
+%patch -P3 -p1
+%patch -P4 -p1
 
 # to allow deprecation warnings
 %{__sed} -i -e 's/-Werror //' src/Makefile.am
@@ -281,7 +285,8 @@ export CFLAGS="%{rpmcflags} -fcommon"
 for gtkver in %{?with_gtk2:2} %{?with_gtk3:3}; do
 install -d build-gtk$gtkver
 cd build-gtk$gtkver
-../%configure \
+%global		configuredir	..
+%configure \
 	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static} \
 	--with-gtk=$gtkver \

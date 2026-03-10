@@ -1,0 +1,11 @@
+--- libappindicator-12.10.0/src/app-indicator.c.orig	2012-09-17 20:59:41.000000000 +0200
++++ libappindicator-12.10.0/src/app-indicator.c	2026-03-10 17:45:00.000000000 +0100
+@@ -2196,7 +2196,7 @@
+ 
+ 	g_return_if_fail (GTK_IS_WIDGET (menuitem));
+ 
+-	priv->sec_activate_target = g_object_ref(G_OBJECT(menuitem));
++	priv->sec_activate_target = g_object_ref(menuitem);
+ 	priv->sec_activate_enabled = widget_is_menu_child(self, menuitem);
+ 	g_signal_connect(menuitem, "parent-set", G_CALLBACK(sec_activate_target_parent_changed), self);
+ }

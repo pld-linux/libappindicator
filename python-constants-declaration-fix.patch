@@ -1,0 +1,10 @@
+--- libappindicator-12.10.0/bindings/python/appindicatormodule.c.orig	2012-07-11 17:42:27.000000000 +0200
++++ libappindicator-12.10.0/bindings/python/appindicatormodule.c	2026-03-10 17:52:00.000000000 +0100
+@@ -30,6 +30,7 @@
+  
+ void pyappindicator_register_classes (PyObject *d); 
+ extern PyMethodDef pyappindicator_functions[];
++void _appindicator_add_constants (PyObject *module, const gchar *strip_prefix);
+ 
+ DL_EXPORT(void)
+ init_appindicator(void)
